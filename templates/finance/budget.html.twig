@@ -1,0 +1,36 @@
+ 
+        {% extends 'finance/financemain.html.twig' %}
+
+        {% block body %}
+            <br/>
+            <h2>Budżety</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th> 
+                        <th scope="col">Saldo</th> 
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for budget in budgets %}
+                        <tr> 
+                            <td>{{ budget.id }}</td>
+                            <td>{{ budget.name }}</td>
+                            <td>{{ budget.saldo }}</td>
+                            <td>
+                                <a href="/budget/edit/{{ budget.id }}" > <i class="fa fa-edit " aria-hidden="true"></i> </a>
+                                <a href="/budget/delete/{{ budget.id }}" class="delconfirm"> <i class="fa fa-trash " aria-hidden="true"></i> </a>    
+                            </td>
+                        </tr>
+                {% else %}
+                    <td colspan="4">Brak Budżetów</li>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="/budget/add" class="btn btn-info">Dodaj Budżet</a><br/>
+        {% endblock %}
+ 
+
+ 
