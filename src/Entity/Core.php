@@ -95,6 +95,16 @@ class Core
         $this->type = "invoice";
         $this->rel_id = $id;
         $this->warning = $warn;
+    } 
+    
+    public function getType(): ?string
+    {
+        return $this->type;
     }    
+
+    public function getRel_Id(): ?int
+    {
+        return $this->rel_id;
+    } 
 
 }

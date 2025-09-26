@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Contractor;
+use App\Entity\Core;
 use Doctrine\ORM\EntityManagerInterface; 
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,4 +21,17 @@ final class WarningController extends AbstractController
            'tab' => 'warning'     
         ]);
     }
+
+     #[Route('/warning/delete/{id}')]
+    public function delBudget($id, EntityManagerInterface $entityManager): Response {
+    
+        $coreRepository = $entityManager->getRepository(Core::class);
+     
+        $core = $coreRepository->find($id);
+        $core->deleted();
+        $entityManager->persist($core);
+        $entityManager->flush();        
+         $this->addFlash('success', 'Ostrzeżenie zostało usunięte');
+        return $this->redirect('/warnings');     
+    }      
 }
