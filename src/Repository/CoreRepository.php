@@ -50,4 +50,13 @@ class CoreRepository extends ServiceEntityRepository
             ->getArrayResult();
       }
 
+      public function findUnpaidInvoiceWarning() {
+           return $this->createQueryBuilder('c')
+            ->select('c.rel_id as id')
+            ->where("c.type = 'invoice' ")
+            ->andwhere('c.deleted = 0')
+            ->getQuery()
+            ->getArrayResult();
+      }
+
 }

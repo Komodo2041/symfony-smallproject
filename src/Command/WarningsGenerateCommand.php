@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 use App\DataFixtures\AppBudgetCheckWarnings;
- 
+use App\DataFixtures\AppInvoiceCheckWarnings;
  
 #[AsCommand(
     name: 'app:warnings:generate',
@@ -22,7 +22,6 @@ use App\DataFixtures\AppBudgetCheckWarnings;
 class WarningsGenerateCommand extends Command
 {
  
-
     private $objectManager;
 
     // Wstrzyknięcie ObjectManager
@@ -44,12 +43,13 @@ class WarningsGenerateCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
  
-      
-
         $output->writeln('Loading Budget Warning ...');
         $fixtures = new AppBudgetCheckWarnings();
         $fixtures->load($this->objectManager);
  
+        $output->writeln('Loading Invoice Warning ...');
+        $fixtures = new AppInvoiceCheckWarnings();
+        $fixtures->load($this->objectManager);        
  
         return Command::SUCCESS;
     }

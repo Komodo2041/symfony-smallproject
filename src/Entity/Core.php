@@ -85,12 +85,16 @@ class Core
         $this->updatedAt = new \DateTimeImmutable();
     }
 
-    public function setBudgetWarning($id, $warn) {
-       
+    public function setBudgetWarning($id, $warn) {      
         $this->type = "budget";
         $this->rel_id = $id;
-        $this->warning = $warn;
-        
+        $this->warning = $warn;        
     }
+
+    public function setInvoiceWarning($id, $warn) {       
+        $this->type = "invoice";
+        $this->rel_id = $id;
+        $this->warning = $warn;
+    }    
 
 }
