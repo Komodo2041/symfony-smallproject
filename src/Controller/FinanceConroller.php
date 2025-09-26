@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Contractor;
- 
 use Doctrine\ORM\EntityManagerInterface; 
 
 use Symfony\Component\Routing\Attribute\Route;

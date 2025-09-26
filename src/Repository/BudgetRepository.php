@@ -40,4 +40,16 @@ class BudgetRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findminusbudget() {
+         
+        return $this->createQueryBuilder('b')
+            ->select('b.id')
+            ->where('b.saldo < 0 ')
+            ->andwhere('b.deleted = 0')
+            ->getQuery()
+            ->getArrayResult();
+ 
+    } 
+
 }

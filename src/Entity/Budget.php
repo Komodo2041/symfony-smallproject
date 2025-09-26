@@ -5,7 +5,7 @@ namespace App\Entity;
 use App\Repository\BudgetRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\ORM\QueryBuilder;
  
 #[ORM\Entity(repositoryClass: BudgetRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Włącza obsługę callbacków
@@ -103,5 +103,7 @@ class Budget
     {
         $this->updatedAt = new \DateTimeImmutable();
     }
+
+ 
 
 }

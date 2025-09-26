@@ -40,4 +40,14 @@ class CoreRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+      public function findBudgetMinusWarning() {
+           return $this->createQueryBuilder('c')
+            ->select('c.rel_id as id')
+            ->where("c.type = 'budget' ")
+            ->andwhere('c.deleted = 0')
+            ->getQuery()
+            ->getArrayResult();
+      }
+
 }

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CoreRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
 
 #[ORM\Entity(repositoryClass: CoreRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Włącza obsługę callbacków
@@ -14,6 +15,15 @@ class Core
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[ORM\Column]
+    private ?int $rel_id = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $type = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $warning = null;
 
     #[ORM\Column]
     private ?int $deleted = 0;
@@ -73,6 +83,14 @@ class Core
     public function setUpdatedAtValue(): void
     {
         $this->updatedAt = new \DateTimeImmutable();
+    }
+
+    public function setBudgetWarning($id, $warn) {
+       
+        $this->type = "budget";
+        $this->rel_id = $id;
+        $this->warning = $warn;
+        
     }
 
 }
