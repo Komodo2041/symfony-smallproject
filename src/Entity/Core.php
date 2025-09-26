@@ -2,21 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\ContractorRepository;
-use Doctrine\DBAL\Types\Types;
+use App\Repository\CoreRepository;
 use Doctrine\ORM\Mapping as ORM;
- 
-#[ORM\Entity(repositoryClass: ContractorRepository::class)]
+
+#[ORM\Entity(repositoryClass: CoreRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Włącza obsługę callbacków
-class Contractor
+
+class Core
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column]
     private ?int $id = null;
-
-    #[ORM\Column(length: 256)]
-    private ?string $name = null;
 
     #[ORM\Column]
     private ?int $deleted = 0;
@@ -28,23 +25,12 @@ class Contractor
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $del_time = null;  
+    private ?\DateTimeInterface $del_time = null;
+
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function deleted() {
@@ -88,10 +74,5 @@ class Contractor
     {
         $this->updatedAt = new \DateTimeImmutable();
     }
-
-    public function __toString(): string // Opcjonalne, ale przydatne dla choice_label
-    { 
-        return $this->name ?: '';
-    }    
 
 }

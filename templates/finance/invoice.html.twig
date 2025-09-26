@@ -1,0 +1,40 @@
+ 
+        {% extends 'finance/financemain.html.twig' %}
+
+        {% block body %}
+            <br/>
+            <h2>Faktury</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">UID</th> 
+                        <th scope="col">Kwota</th>
+                        <th scope="col">Termin Płatności</th> 
+                        <th scope="col">Kontraktor</th> 
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for invoice in invoices %}
+                        <tr> 
+                            <td>{{ invoice.id }}</td>
+                            <td>{{ invoice.uid }}</td>
+                            <td>{{ invoice.amount }}</td>
+                            <td>{{ invoice.delayed_date }}</td>
+                             <td> {{ invoice.contractor }}</td>
+                            <td>
+                                <a href="/invoice/edit/{{ invoice.id }}" > <i class="fa fa-edit " aria-hidden="true"></i> </a>
+                                <a href="/invoice/delete/{{ invoice.id }}" class="delconfirm"> <i class="fa fa-trash " aria-hidden="true"></i> </a>    
+                            </td>
+                        </tr>
+                {% else %}
+                    <td colspan="4">Brak Faktur</li>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="/invoice/add" class="btn btn-info">Dodaj Fakturę</a><br/>
+        {% endblock %}
+ 
+
+ 
