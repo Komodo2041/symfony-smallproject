@@ -59,4 +59,13 @@ class CoreRepository extends ServiceEntityRepository
             ->getArrayResult();
       }
 
+      public function findUnpaidContractorWarning() {
+            return $this->createQueryBuilder('c')
+            ->select('c.rel_id as id')
+            ->where("c.type = 'contractor' ")
+            ->andwhere('c.deleted = 0')
+            ->getQuery()
+            ->getArrayResult();       
+      }
+
 }

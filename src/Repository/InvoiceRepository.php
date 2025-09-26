@@ -26,6 +26,19 @@ class InvoiceRepository extends ServiceEntityRepository
             ->setParameter('currentDate', new \DateTimeImmutable('today'))
             ->getQuery()
             ->getArrayResult();
- 
     } 
+
+    public function findContractorUnpaidInvoice() {
+         return $this->createQueryBuilder('i')
+            ->select('c.id as id, SUM(i.amount) as allamount')
+            ->join('i.contractor', 'c') 
+            ->where('i.delayed_date < :currentDate ')
+            ->andwhere('i.status = 0')
+            ->andwhere('i.deleted = 0')
+            ->groupBy('c.id')
+            ->setParameter('currentDate', new \DateTimeImmutable('today'))
+            ->having('allamount > 15000 ')
+            ->getQuery()
+            ->getArrayResult();       
+    }
 }

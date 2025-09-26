@@ -14,7 +14,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 use App\DataFixtures\AppBudgetCheckWarnings;
 use App\DataFixtures\AppInvoiceCheckWarnings;
+use App\DataFixtures\AppContractorCheckWarnings; 
  
+
 #[AsCommand(
     name: 'app:warnings:generate',
     description: 'Add a short description for your command',
@@ -51,6 +53,10 @@ class WarningsGenerateCommand extends Command
         $fixtures = new AppInvoiceCheckWarnings();
         $fixtures->load($this->objectManager);        
  
+        $output->writeln('Loading Contractor Warning ...');
+        $fixtures = new AppContractorCheckWarnings();
+        $fixtures->load($this->objectManager);   
+
         return Command::SUCCESS;
     }
 }

@@ -97,6 +97,12 @@ class Core
         $this->warning = $warn;
     } 
     
+    public function setContractorWarning($id, $warn) {       
+        $this->type = "contractor";
+        $this->rel_id = $id;
+        $this->warning = $warn;
+    } 
+     
     public function getType(): ?string
     {
         return $this->type;
